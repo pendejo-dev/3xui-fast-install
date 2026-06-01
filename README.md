@@ -24,15 +24,16 @@
 Нужны VPS с Debian/Ubuntu, root-доступ по SSH и домен с A-записью на IP сервера.
 
 ```bash
-git clone https://github.com/AppsGanin/3xui-fast-install/3xui-personal
-cd 3xui-personal
+git clone https://github.com/AppsGanin/3xui-fast-install.git
+cd 3xui-fast-install
 
 bash deploy.sh 1.2.3.4
 ```
 
 После установки скрипт покажет URL панели, логин, пароль и персональную ссылку подписки первого клиента. Эти же данные сохраняются на сервере в `/root/3xui-credentials.txt`.
 
-Для установки через ИИ-агента см. [AI_INSTALL.md](AI_INSTALL.md).
+Также можно установить с помощью ИИ-агента. Он проведёт вас через все шаги, от выбора VPS и домена до финальной настройки. ИИ-агент автоматически обработает смену SSH-ключа, если сервер уже был
+установить. Подробная инструкция для агента: [AI_INSTALL.md](AI_INSTALL.md).
 
 ## Компоненты
 
@@ -60,6 +61,7 @@ bash deploy.sh 1.2.3.4
 | Всё остальное                            | `direct`                                               |
 
 GeoIP/GeoSite для клиентов Happ подписки берутся из [roscomvpn-routing](https://github.com/hydraponique/roscomvpn-routing).
+
 ## Требования
 
 - Debian 12+ или Ubuntu 22.04+.
@@ -111,8 +113,8 @@ GeoIP/GeoSite для клиентов Happ подписки берутся из 
 ```bash
 ssh root@<IP>
 apt-get update && apt-get install -y git
-git clone https://github.com/AppsGanin/3xui-fast-install/3xui-personal
-cd 3xui-personal
+git clone https://github.com/AppsGanin/3xui-fast-install.git
+cd 3xui-fast-install
 ```
 
 Минимальный запуск, домен будет запрошен интерактивно:
