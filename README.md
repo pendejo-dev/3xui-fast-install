@@ -219,6 +219,8 @@ bash restore.sh <IP> backups/backup_1.2.3.4_20260508_120000.tar.gz
 bash restore.sh <IP> backups/backup_*.tar.gz -i ~/.ssh/id_rsa
 ```
 
+> **Важно:** `restore.sh` рассчитан на сервер с уже установленным окружением (Docker, Tor, WARP, Opera Proxy и пр.). На чистом (новом) сервере сначала выполните `deploy.sh`, а затем запустите `restore.sh` — он заменит данные 3x-ui содержимым бекапа.
+
 Архив содержит базу 3x-ui, сертификаты, docker-compose файлы, Caddy-конфиг, статические файлы маскировки и файл доступов.
 
 ### Прямо на сервере (без локальной машины)
@@ -284,7 +286,6 @@ ssh root@<IP> 'bash /root/3xui-setup/restore.sh latest'
 | `HY2_PORT`        | `63000`      | Порт Hysteria2 UDP                                    |
 | `OPERA_REGION`    | `EU`         | Регион для Opera Proxy (`AM`, `EU`, `AS`, и т.д.)     |
 | `TRAFFIC_RESET`   | `monthly`    | Сброс трафика инбаундов (`never`, `daily`, `monthly`) |
-| `XUI_VERSION`     | `latest`     | Версия образа 3x-ui (тег Docker)                      |
 | `SSH_PORT`        | `22`         | SSH-порт сервера                                      |
 | `SSH_USER`        | `root`       | SSH-пользователь                                      |
 

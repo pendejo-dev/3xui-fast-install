@@ -114,7 +114,7 @@ export CERT_DIR="${XUI_DIR}/cert/ssl"
 export VLESS_PORT="${VLESS_PORT:-443}"
 export TRAFFIC_RESET="${TRAFFIC_RESET:-monthly}"
 export LOGFILE="${XUI_DIR}/3xui-install.log"
-export XUI_VERSION="${XUI_VERSION:-latest}"
+export XUI_VERSION="3.2.6"
 
 export PANEL_PORT="${PANEL_PORT:-60000}"
 export PANEL_USER="${PANEL_USER:-admin}"
