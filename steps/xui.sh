@@ -9,6 +9,10 @@ mkdir -p "${XUI_DIR}/db" "${XUI_DIR}/cert"
 [[ -z "${PG_HOST:-}" ]] && die "PG_HOST не задан. Укажите хост PostgreSQL."
 [[ -z "${PG_PASS:-}" ]] && die "PG_PASS не задан. Укажите пароль PostgreSQL."
 
+# Формируем DSN строку подключения для PostgreSQL
+# Формат: postgres://user:password@host:port/dbname?sslmode=disable
+PG_DSN="postgres://${PG_USER}:${PG_PASS}@${PG_HOST}:${PG_PORT}/${PG_DB}?sslmode=${PG_SSL_MODE}"
+
 # ── docker-compose.yml ───────────────────────────────────────────────────────
 cat > "${XUI_DIR}/docker-compose.yml" <<EOF
 services:
@@ -24,12 +28,7 @@ services:
       XUI_ENABLE_FAIL2BAN: "true"
       TZ: "${TZ:-Europe/Moscow}"
       XUI_DB_TYPE: "postgres"
-      XUI_DB_HOST: "${PG_HOST}"
-      XUI_DB_PORT: "${PG_PORT}"
-      XUI_DB_USER: "${PG_USER}"
-      XUI_DB_PASS: "${PG_PASS}"
-      XUI_DB_NAME: "${PG_DB}"
-      XUI_DB_SSL_MODE: "${PG_SSL_MODE}"
+      XUI_DB_DSN: "${PG_DSN}"
     tty: true
     network_mode: host
     restart: unless-stopped
