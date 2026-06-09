@@ -123,8 +123,8 @@ export PG_PASS="${PG_PASS:-}"
 export PG_DB="${PG_DB:-x-ui}"
 export PG_SSL_MODE="${PG_SSL_MODE:-disable}"
 
-export XUI_DB_TYPE: "postgres"
-export XUI_DB_DSN: "postgres://user:password@host:port/dbname?sslmode=disable"
+export XUI_DB_TYPE="postgres"
+export XUI_DB_DSN="postgres://user:password@host:port/dbname?sslmode=disable"
 
 export PANEL_PORT="${PANEL_PORT:-60000}"
 export PANEL_USER="${PANEL_USER:-admin}"
