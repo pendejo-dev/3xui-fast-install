@@ -252,10 +252,16 @@ PANEL_PASS_HASH=$(htpasswd -bnBC 10 "" "$PANEL_PASS" | tr -d ':\n') \
 
 PANEL_USER_SQL=$(pg_escape "$PANEL_USER")
 PANEL_PASS_HASH_SQL=$(pg_escape "$PANEL_PASS_HASH")
-pg_exec "UPDATE users SET username='${PANEL_USER_SQL}', password='${PANEL_PASS_HASH_SQL}' WHERE id=1;"
+pg_exec "UPDATE users SET username='${PANEL_USER_SQL}', password='${PANEL_PASS_HASH_SQL}' WHERE id=(SELECT MIN(id) FROM users);"
 
 # ── Финальный старт ──────────────────────────────────────────────────────────
 docker compose -f "${XUI_DIR}/docker-compose.yml" up -d \
     || die "Не удалось запустить контейнер 3x-ui."
+
+# Перезапускаем, чтобы 3x-ui перечитал обновлённые данные из БД
+sleep 2
+docker compose -f "${XUI_DIR}/docker-compose.yml" restart \
+    || die "Не удалось перезапустить контейнер 3x-ui."
+
 sleep 3
 success "3x-ui запущен с внешним PostgreSQL (${PG_HOST}:${PG_PORT}). Управление: docker compose -f ${XUI_DIR}/docker-compose.yml"
